@@ -9,14 +9,18 @@ const db = new DB();
 
 async function ping() {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-  let i = 0;
   while(true) {
     await sleep(5000);
-    i++;
-    console.log(`index ${i} Pinging...`);
-    fetch('http://localhost:8080/health/status', {method: "GET", mode: 'no-cors', headers: {'Content-Type': 'text/plain'}})
-      .then(response => response.json())
-      .then(data => console.log(data))
+    fetch('http://localhost:8080/health/status')
+      .then(response => response.text())
+      .then(text => {
+        console.log('text', text);
+        if (text === 'Ok!') {
+          return text;
+        } else {
+          throw new Error('Server is not responding');
+        }
+      })
       .catch(err => console.error(err));
   }
 };
