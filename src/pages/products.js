@@ -1,13 +1,17 @@
 import { Item, List } from "../components/product";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { UpdateStatus } from '../components/ping';
 
 export function Products({ db }) {
     const [products, setProducts] = useState([]);
+    UpdateStatus(db);
 
     useEffect(()=>{
-        db.getProducts().then((data) => {
-          if(data){setProducts(data)}
+        db.getAll().then(data => {
+            if(data){
+                setProducts(data)
+            }
         });
     }, [db]);
 
@@ -21,9 +25,10 @@ export function Products({ db }) {
 export function Product( {db} ) {
     const {id} = useParams();
     const [product, setProduct] = useState({});
+    UpdateStatus(db);
 
     useEffect(()=>{
-        db.getProduct(id).then((data) => {
+        db.getItem(id).then((data) => {
             if(data && data.type === 'product'){setProduct(data)}
         });
     }, [db, id]);
@@ -37,17 +42,19 @@ export function Product( {db} ) {
 
 export function New({ db }) {
     const navigate = useNavigate();
+    UpdateStatus(db);
     const [product, setProduct] = useState({
         title: '',
         content: '',
         date: '',
         type: 'product',
+        sync: false,
         important: true
     });
 
     const handleSubmit = e => {
         e.preventDefault();
-        db.addProduct(product).then((data) => {
+        db.addItem(product).then((data) => {
             if(data.id){
                 navigate(`/products/${data.id}`)
             }
