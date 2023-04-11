@@ -14,7 +14,7 @@ export default function Navigation() {
                 <ul className="flex flex-wrap items-center justify-center mb-6 text-gray-900 dark:text-white">
                     {items.map((nav) => (
                         <li key={nav.id}>
-                            <Link className="bg-indigo-300 px-4 py-1 rounded-md mr-4 hover:underline md:mr-6" to={nav.url}>{nav.title}</Link>
+                            <Link id={nav.id} className="bg-indigo-300 px-4 py-1 rounded-md mr-4 hover:underline md:mr-6" to={nav.url}>{nav.title}</Link>
                         </li>
                     ))}
                 </ul>
