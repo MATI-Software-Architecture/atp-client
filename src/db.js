@@ -72,8 +72,8 @@ export default class DB {
             }
         })
         .then(doc => doc)
-        .catch(async err => {
-            console.log('error', err);
+        .catch(async error => {
+            console.log('error', error);
             try {
                 return await this.db.put(product);
             } catch (error) {

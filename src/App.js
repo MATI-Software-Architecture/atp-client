@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Navigation from './components/navigation';
-import { Ping, getStatus } from './components/ping';
+import { Ping, getStatus, RetrieveData } from './components/ping';
 import Index from './pages/index';
 import { Product, Products, New } from './pages/products';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -9,7 +9,9 @@ import DB from './db';
 
 const db = new DB();
 export const UserContext = React.createContext();
+
 Ping(db);
+RetrieveData(db);
 
 function App() {
   const [status, setStatus] = useState(true);
