@@ -2,8 +2,8 @@ import React from 'react';
 import { UserContext } from "../App";
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const timer = 10000;
-const timeOut = 9000;
+const timer = 1000;
+const timeOut = 900;
 let data = { _id: 'ping', text: 'Ok!', date: new Date().toISOString() };
 
 export async function Ping(db) {
@@ -13,6 +13,7 @@ export async function Ping(db) {
             .then(response => response.text())
             .then(text => {
                 data.text = text;
+                console.log(text, data.date);
                 db.updateItem(data);
                 if (text === 'Ok!') {
                     SyncData(db);
@@ -31,6 +32,7 @@ export async function SyncData(db) {
     db.getUnsync().then(items => {
         items.forEach(item => {
             item.sync = true;
+            console.log(item);
             let body = JSON.stringify(item);
             fetch('http://localhost:8080/products', {method: 'POST', headers: headers, body: body})
                 .then(response => {
@@ -49,6 +51,7 @@ export async function RetrieveData(db) {
         .then(data => {
             data.forEach(item => {
                 item.sync = true;
+                console.log(item);
                 db.updateItem(item);
             });
         });

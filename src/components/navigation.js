@@ -9,14 +9,16 @@ const items = [
 
 export default function Navigation() {
     return (
-        <nav className="navBar">
-            <ul>
-                {items.map((nav) => (
-                    <li key={nav.id}>
-                        <Link to={nav.url}>{nav.title}</Link>
-                    </li>
-                ))}
-            </ul>
-        </nav>
+        <div className="justify-center">
+            <div className="flex justify-center items-center py-8">
+                <ul className="flex flex-wrap items-center justify-center mb-6 text-gray-900 dark:text-white">
+                    {items.map((nav) => (
+                        <li key={nav.id}>
+                            <Link className="bg-indigo-300 px-4 py-1 rounded-md mr-4 hover:underline md:mr-6" to={nav.url}>{nav.title}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     );
 }

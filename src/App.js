@@ -18,24 +18,22 @@ function App() {
   getStatus(db).then((data) => { setStatus(data) });
   return (
       <BrowserRouter>
-        <div className="App">
+        <div className="bg-zinc-400 h-screen text-white">
           <UserContext.Provider value={{ status: status, setStatus: setStatus }}>
           <Navigation />
-          <h2>Server status: {status ? 'Ok!' : 'Not responding'}</h2>
-          <Routes>
-            <Route path="/" element = 
-              {<Index db={db}/>} 
-            />
-            <Route path="/products" element = 
-              {<Products db={db}/>} 
-            />
-            <Route path="/products/:id" element = 
-              {<Product db={db}/>}
-            />
-            <Route path="/products/new" element =
-              {<New db={db} />}
-            />
-          </Routes>
+          <div className='flex items-center justify-center'>
+            <h2 className='justify-center py-2 block mb-2 text-sm font-medium dark:text-white'>Server status: {status ? 'Online' : 'Offline'}</h2>
+          </div>
+          
+          <div className='flex items-center justify-center'>
+            <Routes>
+              <Route path="/" element = {<Index db={db}/>} />
+              <Route path="/products" element = {<Products db={db}/>} />
+              <Route path="/products/:id" element = {<Product db={db}/>} />
+              <Route path="/products/new" element = {<New db={db} />} />
+            </Routes>
+          </div>
+          
           </UserContext.Provider>
         </div>
       </BrowserRouter>

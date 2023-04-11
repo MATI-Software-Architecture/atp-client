@@ -8,7 +8,7 @@ export function Products({ db }) {
     UpdateStatus(db);
 
     useEffect(()=>{
-        db.getAll().then(data => {
+        db.getByType('product').then(data => {
             if(data){
                 setProducts(data)
             }
@@ -18,7 +18,12 @@ export function Products({ db }) {
     if (products.length === 0) {
         return <h2>No products found</h2>;
     } else {
-        return <List products={products} />;
+        return (
+            <div>
+                <h2>Products</h2>
+                <List products={products} />
+            </div>
+        );
     }
 }
 
@@ -65,24 +70,26 @@ export function New({ db }) {
         <div>
             <h2>New Product</h2>
             <form onSubmit={handleSubmit}>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label>Title</label>
-                    <input type="text" name="title" value={product.title} onChange={e => setProduct({ ...product, title: e.target.value })} />
+                    <label class="block mb-2 text-sm font-medium dark:text-white">Product</label>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="title" value={product.title} onChange={e => setProduct({ ...product, title: e.target.value })} />
                 </div>
                 <div>
-                    <label>Content</label>
-                    <input type="text" name="content" value={product.content} onChange={e => setProduct({ ...product, content: e.target.value })} />
+                    <label class="block mb-2 text-sm font-medium dark:text-white">Price</label>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="content" value={product.content} onChange={e => setProduct({ ...product, content: e.target.value })} />
                 </div>
                 <div>
-                    <label>Date</label>
-                    <input type="text" name="date" value={product.date} onChange={e => setProduct({ ...product, date: e.target.value })} />
+                    <label class="block mb-2 text-sm font-medium dark:text-white">Date</label>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="date" value={product.date} onChange={e => setProduct({ ...product, date: e.target.value })} />
                 </div>
                 <div>
-                    <label>Important</label>
-                    <input type="checkbox" name="important" value={product.important} onChange={e => setProduct({ ...product, important: e.target.value })} />
+                    <label class="block mb-2 text-sm font-medium dark:text-white">Important</label>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="checkbox" name="important" value={product.important} onChange={e => setProduct({ ...product, important: e.target.value })} />
                 </div>
-                <button type="submit">Save</button>
-                <Link to="/products">Cancel</Link>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Save</button>
+                <Link class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" to="/products">Cancel</Link>
+            </div>
             </form>
         </div>
     );
